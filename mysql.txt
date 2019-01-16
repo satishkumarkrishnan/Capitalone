@@ -1,0 +1,20 @@
+SET @sql = NULL;
+        SELECT GROUP_CONCAT("'",COLUMN_NAME,"'")
+          FROM
+        (SELECT `COLUMN_NAME`
+        FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+        WHERE `TABLE_SCHEMA` = 'DBA_NAME'
+        and `TABLE_NAME`='TABLE_NAMES'
+        ) AS colnames
+        GROUP BY 'COLUMN_NAME' 
+        into @sql;
+
+        SET @sql = concat ("SELECT", @sql, " from dual
+        UNION ALL
+        SELECT *
+        FROM TABLE_NAME
+        INTO OUTFILE 'D:\exportmysql.csv'
+        FIELDS TERMINATED BY ','
+        ENCLOSED BY '", '"',"'
+        )"
+        );
