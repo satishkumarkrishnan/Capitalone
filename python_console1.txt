@@ -1,0 +1,137 @@
+Python 2.7.9 (default, Dec 10 2014, 12:24:55) [MSC v.1500 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import boto3
+>>> s3 = boto3.resource('s3')
+>>> s3.create_bucket(Bucket='newPython', CreateBucketConfiguration={'LocationConstraint': 'us-east-1'})
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python27\lib\site-packages\boto3\resources\factory.py", line 520, in do_action
+    response = action(self, *args, **kwargs)
+  File "C:\Python27\lib\site-packages\boto3\resources\action.py", line 83, in __call__
+    response = getattr(parent.meta.client, operation_name)(**params)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 357, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 661, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (InvalidBucketName) when calling the CreateBucket operation: The specified bucket is not valid.
+>>> s3.create_bucket(Bucket='newpython', CreateBucketConfiguration={'LocationConstraint': 'us-east-1'})
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python27\lib\site-packages\boto3\resources\factory.py", line 520, in do_action
+    response = action(self, *args, **kwargs)
+  File "C:\Python27\lib\site-packages\boto3\resources\action.py", line 83, in __call__
+    response = getattr(parent.meta.client, operation_name)(**params)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 357, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 661, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (InvalidLocationConstraint) when calling the CreateBucket operation: The specified location-constraint is not valid
+>>> s3_connection.create_bucket('mybucket')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 's3_connection' is not defined
+>>> s3_connection.create_bucket('mybucket', location=Location.USWest)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 's3_connection' is not defined
+>>> s3_connection = boto.connect_s3()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'boto' is not defined
+>>> import boto
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named boto
+>>> import boto2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named boto2
+>>> import boto3
+>>> s3.create_bucket('bucket11')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python27\lib\site-packages\boto3\resources\factory.py", line 520, in do_action
+    response = action(self, *args, **kwargs)
+  File "C:\Python27\lib\site-packages\boto3\resources\action.py", line 83, in __call__
+    response = getattr(parent.meta.client, operation_name)(**params)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 357, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 634, in _make_api_call
+    api_params, operation_model, context=request_context)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 682, in _convert_to_request_dict
+    api_params, operation_model)
+  File "C:\Python27\lib\site-packages\botocore\validate.py", line 297, in serialize_to_request
+    raise ParamValidationError(report=report.generate_report())
+botocore.exceptions.ParamValidationError: Parameter validation failed:
+Missing required parameter in input: "Bucket"
+>>> import boto3
+>>> s3.create_bucket(Bucket='bucket12')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python27\lib\site-packages\boto3\resources\factory.py", line 520, in do_action
+    response = action(self, *args, **kwargs)
+  File "C:\Python27\lib\site-packages\boto3\resources\action.py", line 83, in __call__
+    response = getattr(parent.meta.client, operation_name)(**params)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 357, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "C:\Python27\lib\site-packages\botocore\client.py", line 661, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.BucketAlreadyExists: An error occurred (BucketAlreadyExists) when calling the CreateBucket operation: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> s3.create_bucket(Bucket='awsgluepythonbucket6r')
+s3.Bucket(name='awsgluepythonbucket6r')
+>>> s3.Object('awsgluepythonbucket6r', 'colours.json').put(Body=open('D:\SampleJson\colours.json', 'rb'))
+{u'ETag': '"a087fa8dfebb51594b3d5d0a6bac9fbb"', 'ResponseMetadata': {'HTTPStatusCode': 200, 'RetryAttempts': 4, 'HostId': '089PSgk+NX/TBUavwS3wwUy4fZrfijkxuakZxana+lr9Ngx7fL8bZPtCqJL7FB9llK2M/k9hMeI=', 'RequestId': '6ED682E1D59F0884', 'HTTPHeaders': {'content-length': '0', 'x-amz-id-2': '089PSgk+NX/TBUavwS3wwUy4fZrfijkxuakZxana+lr9Ngx7fL8bZPtCqJL7FB9llK2M/k9hMeI=', 'server': 'AmazonS3', 'x-amz-request-id': '6ED682E1D59F0884', 'etag': '"a087fa8dfebb51594b3d5d0a6bac9fbb"', 'date': 'Mon, 28 Jan 2019 11:42:59 GMT'}}}
+>>> s3.Object('awsgluepythonbucket6r', 'colours.json').put(Body=open('D:\SampleJson\marker.json', 'rb'))
+{u'ETag': '"96c578d7cb43263c53865d0f11a17e90"', 'ResponseMetadata': {'HTTPStatusCode': 200, 'RetryAttempts': 0, 'HostId': 'T/eJhlm2kAYHvg0IXBUovTwksztYX30+JxHCrZLI1/86WQz0sCYi+d/TlJHm3HfkZ5uHNtKkD2U=', 'RequestId': '28D920C61A6DE304', 'HTTPHeaders': {'content-length': '0', 'x-amz-id-2': 'T/eJhlm2kAYHvg0IXBUovTwksztYX30+JxHCrZLI1/86WQz0sCYi+d/TlJHm3HfkZ5uHNtKkD2U=', 'server': 'AmazonS3', 'x-amz-request-id': '28D920C61A6DE304', 'etag': '"96c578d7cb43263c53865d0f11a17e90"', 'date': 'Mon, 28 Jan 2019 11:45:03 GMT'}}}
+>>> s3.Object('awsgluepythonbucket6r', 'colours.json').put(Body=open('D:\SampleJson\books.json', 'rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\x08ooks.json'
+>>> s3.Object('awsgluepythonbucket6r', 'marker.json').put(Body=open('D:\SampleJson\marker.json', 'rb'))
+{u'ETag': '"96c578d7cb43263c53865d0f11a17e90"', 'ResponseMetadata': {'HTTPStatusCode': 200, 'RetryAttempts': 3, 'HostId': '7PSh6cOLS8pkHgynenWzBtTyfNasLwP/M/QlhVZ0P43qUmYGfKKCDpZyvrqHVVhu53OHCG84jvs=', 'RequestId': '49009D7CCDCA73E0', 'HTTPHeaders': {'content-length': '0', 'x-amz-id-2': '7PSh6cOLS8pkHgynenWzBtTyfNasLwP/M/QlhVZ0P43qUmYGfKKCDpZyvrqHVVhu53OHCG84jvs=', 'server': 'AmazonS3', 'x-amz-request-id': '49009D7CCDCA73E0', 'etag': '"96c578d7cb43263c53865d0f11a17e90"', 'date': 'Mon, 28 Jan 2019 11:49:31 GMT'}}}
+>>> s3.Object('awsgluepythonbucket6r', 'books.json').put(Body=open('D:\SampleJson\books.json', 'rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\x08ooks.json'
+>>> s3.Object('awsgluepythonbucket6r', 'fruits.json').put(Body=open('D:\SampleJson\fruits.json', 'rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\x0cruits.json'
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json', 'rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\test3.json'
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json', 'rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\test3.json'
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('r') or filename: 'D:\\SampleJson\test3.json'
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json',''))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: empty mode string
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json','rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\test3.json'
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json','rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\test3.json'
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json',''))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: empty mode string
+>>> s3.Object('awsgluepythonbucket6r', 'test3.json').put(Body=open('D:\SampleJson\test3.json','rb'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 22] invalid mode ('rb') or filename: 'D:\\SampleJson\test3.json'
+>>>

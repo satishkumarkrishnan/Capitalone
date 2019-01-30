@@ -1,0 +1,102 @@
+
+# Boto 3
+import boto3
+s3 = boto3.resource('s3')
+Creating a Bucket
+Creating a bucket in Boto 2 and Boto 3 is very similar, except that in Boto 3 all action parameters must be passed via keyword arguments and a bucket configuration must be specified manually:
+
+# Boto 3
+s3.create_bucket(Bucket='mybucket')
+s3.create_bucket(Bucket='mybucket', CreateBucketConfiguration={
+    'LocationConstraint': 'us-west-1'})
+	
+	s3.Object('awsgluepythonbucket6r', 'colours.json').put(Body=open('D:\SampleJson\colours.json', 'rb'))
+	
+	
+	
+	GLUE:
+	
+	client
+	
+	client = boto3.client('glue')
+	
+	glue = boto3.client(service_name='glue', region_name='us-east-1')
+	
+	response = client.create_classifier(JsonClassifier={'Name': 'democlassifier','JsonPath': '$[*]'})
+	
+	
+	
+	Crawler:    Role:  arn:aws:iam::007706116238:role/service-role/AWSGlueServiceRole-Demo_Glue
+	
+	arn:aws:iam::007706116238:role/service-role/AWSGlueServiceRole-Demo_Aws_Glue
+	
+	
+	responsec = client.create_crawler(
+    Name='gluecrawlerd1',
+    Role='arn:aws:iam::007706116238:role/service-role/AWSGlueServiceRole-Demo_Glue',
+	DatabaseName='demo_glue',
+    Description='demo',
+    Targets={
+        'S3Targets': [
+            {
+                'Path': 's3://awsgluepythonbucket6r' 
+            }
+        ]
+    },
+    Classifiers=[
+        'democlassifier',
+    ],
+    SchemaChangePolicy={
+        'UpdateBehavior': 'UPDATE_IN_DATABASE',
+        'DeleteBehavior': 'DEPRECATE_IN_DATABASE'
+    }
+)
+		
+	
+	creating a job :
+	
+	//  for reference 
+	-----------------------------------------------------------------------------------------------------------
+	
+	myJob = client.create_job(Name='sample', Role='Glue_DefaultRole',
+                          Command={'Name': 'glueetl',
+                                   'ScriptLocation': 's3://my_script_bucket/scripts/my_etl_script.py'})
+								   								   
+-------------------------------------------------------------------------------------------------------------------								   
+								   
+								   
+	Create job:							   
+								   
+	response = client.create_job(
+    Name='demogluejob1',
+    Description='demo job',
+    Role='arn:aws:iam::007706116238:role/service-role/AWSGlueServiceRole-Demo_Glue',
+    ExecutionProperty={
+        'MaxConcurrentRuns': 2  //limit is 3; do not give more than that
+    },
+    Command={
+        'Name': 'glueetl',
+        'ScriptLocation': 's3://aws-glue-scripts-007706116238-us-east-1/root'
+    },
+    MaxRetries=5,
+    AllocatedCapacity=2,   //either allocated or max capacity should be given; both cannot be given at a time
+    Timeout=5,
+    NotificationProperty={
+        'NotifyDelayAfter': 10
+    }
+)
+
+
+
+
+   Run Job:
+
+	response = client.start_job_run(
+    JobName='demogluejob1',
+    AllocatedCapacity=2,
+    Timeout=5,
+    NotificationProperty={
+        'NotifyDelayAfter': 10
+    }
+)
+	
